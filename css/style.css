@@ -3,11 +3,11 @@
    tokens
    ========================================================= */
 :root{
-  --space:#070d1f; --strato:#0e2a52; --sky:#2b6ca3;
-  --horizon:#6e5a3a; --earth:#2e2116; --under:#12100d; --corebg:#0b0f1a;
-  --ink:#e9eef7; --ink-2:#9fb0c8; --ink-3:#6b7a92;
+  --space:#070d1f; --strato:#0e2a52; --sky:#1f4e7c;
+  --horizon:#4c3f2a; --earth:#291e13; --under:#12100d; --corebg:#0b0f1a;
+  --ink:#e9eef7; --ink-2:#aebfd6; --ink-3:#8b9cb6;
   --gold:#e8b04b; --cyan:#57c7e3;
-  --card:rgba(255,255,255,.055); --card-line:rgba(255,255,255,.14);
+  --card:rgba(11,17,33,.58); --card-line:rgba(255,255,255,.16);
   --radius:14px; --maxw:1080px;
   --sans:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
 }
@@ -143,7 +143,7 @@ main{position:relative;z-index:1}
 
 /* ---------- 高度帶 ---------- */
 .band{max-width:var(--maxw);margin:0 auto;padding:96px 24px 40px;scroll-margin-top:90px}
-.band-head{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
+.band-head{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;text-shadow:0 1px 14px rgba(5,10,22,.55)}
 .band-alt{
   font-variant-numeric:tabular-nums;font-weight:800;font-size:15px;
   color:var(--cyan);letter-spacing:2px;border:1px solid rgba(87,199,227,.4);
@@ -151,7 +151,7 @@ main{position:relative;z-index:1}
 }
 .band h2{font-size:clamp(26px,4vw,38px);font-weight:900;letter-spacing:3px}
 .band h2 .bicon{margin-right:10px}
-.band-sub{color:var(--ink-2);margin-top:6px;max-width:40em}
+.band-sub{color:var(--ink-2);margin-top:6px;max-width:40em;text-shadow:0 1px 10px rgba(5,10,22,.6)}
 
 .grid{
   display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
@@ -159,7 +159,7 @@ main{position:relative;z-index:1}
 }
 .card{
   text-align:left;border:1px solid var(--card-line);border-radius:var(--radius);
-  background:var(--card);padding:18px 18px 16px;
+  background:var(--card);backdrop-filter:blur(3px);padding:18px 18px 16px;
   display:flex;flex-direction:column;gap:8px;
   transition:transform .18s,border-color .18s,box-shadow .18s;
   position:relative;
