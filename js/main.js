@@ -279,7 +279,6 @@
 
   /* ---------- render all ---------- */
   function renderAll() {
-    applyI18n();
     renderStats();
     renderBands();
     renderMore();
@@ -288,6 +287,7 @@
     renderTimeline();
     renderSkills();
     renderHonors();
+    applyI18n();   // 最後跑：涵蓋 template 複製出來的節點（六階段流程等）
     watchAltitude();
     reveals();
   }

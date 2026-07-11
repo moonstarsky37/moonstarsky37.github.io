@@ -189,7 +189,8 @@ main{position:relative;z-index:1}
 
 /* ---------- 六階段流程 ---------- */
 .flow{max-width:var(--maxw);margin:30px auto 0;padding:0 24px 40px}
-.flow h3{font-size:20px;font-weight:800;letter-spacing:2px;margin-bottom:18px}
+.flow h3{font-size:20px;font-weight:800;letter-spacing:2px;margin-bottom:6px}
+.flow-sub{color:var(--ink-2);font-size:14px;max-width:46em;margin-bottom:18px}
 .flowline{
   list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
   gap:10px;counter-reset:step;
@@ -200,12 +201,17 @@ main{position:relative;z-index:1}
   position:relative;
 }
 .flowline li::before{
-  content:counter(step,decimal-leading-zero);display:block;
-  font-size:11px;color:var(--cyan);letter-spacing:2px;margin-bottom:4px;
+  content:"STEP " counter(step,decimal-leading-zero);display:block;
+  font-size:10px;color:var(--cyan);letter-spacing:2px;margin-bottom:4px;
   font-variant-numeric:tabular-nums;
 }
-.flowline li.hot{border-color:var(--gold);color:var(--ink)}
+.flowline li.hot{border-color:var(--gold);color:var(--ink);position:relative}
 .flowline li.hot::before{color:var(--gold)}
+.hot-badge{
+  position:absolute;top:-9px;right:10px;font-style:normal;
+  font-size:10px;letter-spacing:1px;color:#221503;background:var(--gold);
+  padding:1px 8px;border-radius:99px;font-weight:700;
+}
 .flownote{margin-top:14px;font-size:13.5px;color:var(--ink-3)}
 
 /* ---------- 一般 section ---------- */
