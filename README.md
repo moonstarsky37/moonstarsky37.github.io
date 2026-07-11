@@ -25,6 +25,8 @@ python -m http.server 8000
 
 ## 新增作品（唯一要學的事）
 
+> 👉 **完整個人操作手冊見 [`MAINTENANCE.md`](MAINTENANCE.md)**：含「有 GitHub 連結」與「只有圖片＋說明」兩種情境的貼上範本、圖片規範與常見問題。以下為速查。
+
 打開 `js/projects.js`，複製任一物件貼到 `PROJECTS` 陣列，改內容即可。欄位：
 
 | 欄位 | 說明 |

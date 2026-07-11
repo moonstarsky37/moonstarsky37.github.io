@@ -3,13 +3,14 @@
   "use strict";
 
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  let LANG = localStorage.getItem("lang") || "zh";
-  const t = (obj) => (typeof obj === "string" ? obj : (obj && (obj[LANG] || obj.zh)) || "");
+  let LANG = localStorage.getItem("lang") || "en";
+  const t = (obj) => (typeof obj === "string" ? obj : (obj && (obj[LANG] || obj.en || obj.zh)) || "");
 
   /* ---------- i18n ---------- */
   function applyI18n() {
     document.documentElement.lang = LANG === "zh" ? "zh-Hant" : "en";
     document.documentElement.dataset.lang = LANG;
+    if (I18N["doc.title"]) document.title = t(I18N["doc.title"]);
     document.querySelectorAll("[data-i18n]").forEach((el) => {
       const key = el.dataset.i18n;
       if (I18N[key]) el.textContent = t(I18N[key]);
@@ -53,10 +54,12 @@
   /* ---------- 卡片 ---------- */
   function cardHTML(p) {
     const nums = (p.metrics || []).slice(0, 3).map(
-      (m) => `<div><b>${m.v}</b><span>${t(m.label)}</span></div>`
+      (m) => `<div><b>${t(m.v)}</b><span>${t(m.label)}</span></div>`
     ).join("");
+    const thumb = p.thumb ? `<img class="c-thumb" src="${p.thumb}" alt="" loading="lazy">` : "";
     return `
       <span class="c-open" aria-hidden="true">↗</span>
+      ${thumb}
       <div class="c-meta"><span class="c-icon">${p.icon || "◆"}</span><span>${t(p.org)}・${p.period}</span></div>
       <h3>${t(p.title)}</h3>
       <p>${t(p.desc)}</p>
@@ -179,8 +182,14 @@
     document.getElementById("mPeriod").textContent = p.period;
     document.getElementById("mTitle").textContent = t(p.title);
     document.getElementById("mDetail").textContent = t(p.detail);
+    const mImgs = document.getElementById("mImgs");
+    mImgs.innerHTML = (p.images || []).map((src) => {
+      const s = typeof src === "string" ? { src } : src;
+      return `<figure><img src="${s.src}" alt="${s.alt || ""}" loading="lazy">${s.cap ? `<figcaption>${t(s.cap)}</figcaption>` : ""}</figure>`;
+    }).join("");
+    mImgs.style.display = (p.images && p.images.length) ? "" : "none";
     const mM = document.getElementById("mMetrics");
-    mM.innerHTML = (p.metrics || []).map((m) => `<div><b>${m.v}</b><span>${t(m.label)}</span></div>`).join("") || `<span style="color:var(--ink-3)">—</span>`;
+    mM.innerHTML = (p.metrics || []).map((m) => `<div><b>${t(m.v)}</b><span>${t(m.label)}</span></div>`).join("") || `<span style="color:var(--ink-3)">—</span>`;
     document.getElementById("mStack").innerHTML = (p.stack || []).map((s) => `<i>${s}</i>`).join("");
     const linkSec = document.getElementById("mLinkSec");
     const mL = document.getElementById("mLinks");

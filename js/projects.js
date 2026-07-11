@@ -40,7 +40,7 @@ const PROJECTS = [
     desc:  { zh: "以 Open Data Cube 建構衛星影像自動化災害監測與通報系統。", en: "Automated disaster monitoring & alerting on satellite imagery with Open Data Cube." },
     detail:{ zh: "以 Linux 環境部署 Open Data Cube 與 ThinkTron 後端，將多時序衛星影像標準化入庫，供 WebGIS 平台進行災害判釋與通報自動化；同一技術棧後續用於越南遙測大數據教育訓練。",
              en: "Deployed Open Data Cube with the in-house backend on Linux, standardizing multi-temporal satellite imagery for WebGIS-based disaster interpretation and automated alerting; the same stack later powered remote-sensing training in Vietnam." },
-    metrics: [ { v: "多時序", label: { zh: "衛星影像入庫", en: "temporal imagery" } } ],
+    metrics: [ { v: { zh: "多時序", en: "Multi-T" }, label: { zh: "衛星影像入庫", en: "temporal imagery" } } ],
     stack: ["Open Data Cube", "Python", "Linux", "WebGIS", "Sentinel-2"],
     tags: ["platform", "vision"], links: [], featured: false
   },
@@ -51,7 +51,7 @@ const PROJECTS = [
     desc:  { zh: "衛星遙測影像分類，自動盤點全台水稻田分布。", en: "Satellite image classification to inventory rice paddies across Taiwan." },
     detail:{ zh: "於 Data Cube 虛擬機上建立訓練與辨識流程，以衛星影像對全台水稻進行自動化判釋盤點，供農政單位掌握種植分布。",
              en: "Built the training/inference pipeline on Data Cube VMs to automatically classify rice paddies from satellite imagery for agricultural administration." },
-    metrics: [ { v: "全台", label: { zh: "水稻判釋範圍", en: "island-wide coverage" } } ],
+    metrics: [ { v: { zh: "全台", en: "Nationwide" }, label: { zh: "水稻判釋範圍", en: "island-wide coverage" } } ],
     stack: ["Python", "Remote Sensing", "Data Cube", "ML"],
     tags: ["vision"], links: [], featured: false
   },
@@ -66,8 +66,8 @@ const PROJECTS = [
              en: "The 4th national forest survey relied on inconsistent manual interpretation. Trained classifiers on 3,248 DMC aerial images with terrain data across 16 parameter combinations, and built the client a labeling → training → per-image expert-review GUI toolchain, converging dataset quality and shipping into real map-editing operations." },
     metrics: [ { v: "3,248", label: { zh: "航攝影像", en: "aerial images" } },
                { v: "16", label: { zh: "參數組合", en: "parameter combos" } },
-               { v: "3 年", label: { zh: "跨年度維運", en: "years operated" } } ],
-    stack: ["Python", "影像分類", "GUI 工具鏈", "QGIS"],
+               { v: { zh: "3 年", en: "3 yrs" }, label: { zh: "跨年度維運", en: "years operated" } } ],
+    stack: ["Python", "Image Classification", "GUI Toolchain", "QGIS"],
     tags: ["vision", "test"], links: [], featured: true
   },
   {
@@ -79,8 +79,8 @@ const PROJECTS = [
              en: "ConvLSTM over radar echo, generalized from Taoyuan to all of Taiwan; integrated NCDR forecasts and a residual model on a 10-minute automated pipeline with per-source error logging; wrapped the SEC-HY21 2D flood model via C++ and served RESTful APIs to decision systems — operated reliably for years." },
     metrics: [ { v: "3 hr", label: { zh: "預報長度", en: "forecast horizon" } },
                { v: "10 min", label: { zh: "自動更新頻率", en: "refresh cycle" } },
-               { v: "全台", label: { zh: "涵蓋範圍", en: "coverage" } } ],
-    stack: ["ConvLSTM", "Python", "C++", "RESTful API", "排程資料流"],
+               { v: { zh: "全台", en: "Nationwide" }, label: { zh: "涵蓋範圍", en: "coverage" } } ],
+    stack: ["ConvLSTM", "Python", "C++", "RESTful API", "Scheduled Pipelines"],
     tags: ["ts", "test"], links: [], featured: true
   },
   {
@@ -90,9 +90,9 @@ const PROJECTS = [
     desc:  { zh: "動態時間校正演算法比對 40 年歷史颱風庫，找出最相似路徑。", en: "Dynamic Time Warping against a 40-year typhoon database to find the most similar tracks." },
     detail:{ zh: "以 DTW 對當前颱風與 40 年歷史颱風資料庫做「位置」與「形狀」雙軌比對（形狀比對去除地理位置影響），協助防災單位、保險與能源產業做風險應對與決策優化。",
              en: "DTW matches live typhoons against a 40-year historical database on both position and shape (shape matching removes geographic bias), supporting risk decisions for disaster agencies, insurers and energy operators." },
-    metrics: [ { v: "40 年", label: { zh: "歷史資料庫", en: "historical DB" } },
-               { v: "2 軌", label: { zh: "位置＋形狀比對", en: "position + shape" } } ],
-    stack: ["Python", "DTW", "時序分析"],
+    metrics: [ { v: { zh: "40 年", en: "40 yrs" }, label: { zh: "歷史資料庫", en: "historical DB" } },
+               { v: { zh: "雙軌", en: "Dual" }, label: { zh: "位置＋形狀比對", en: "position + shape" } } ],
+    stack: ["Python", "DTW", "Time-Series Analysis"],
     tags: ["ts"], links: [], featured: false
   },
   {
@@ -103,7 +103,7 @@ const PROJECTS = [
     detail:{ zh: "以歷史崩塌調查結果訓練決策樹模型，結合斜坡單元崩塌機率與雨量門檻（R24／I3）判定警戒；透過 TronCube 自動化排程倉儲與 Python SDK 動態取用 DEM 地形因子與最新雨量預報，把「靜態人工」預警升級為「動態自動」。",
              en: "Decision-tree models from historical landslide surveys combine slope-unit failure probability with rainfall thresholds (R24/I3); TronCube scheduled warehousing + Python SDK feed DEM factors and live rainfall forecasts, upgrading static manual alerting to dynamic automation." },
     metrics: [ { v: "R24/I3", label: { zh: "雨量門檻指標", en: "rainfall thresholds" } } ],
-    stack: ["Python", "決策樹", "TronCube SDK", "DEM"],
+    stack: ["Python", "Decision Trees", "TronCube SDK", "DEM"],
     tags: ["ts", "platform"], links: [], featured: false
   },
   {
@@ -124,8 +124,8 @@ const PROJECTS = [
     desc:  { zh: "地表時序位移資料交叉驗證雷達干涉結果，落地坡地社區監測。", en: "Time-series ground displacement cross-validating InSAR for hillside communities." },
     detail:{ zh: "整合海洋大學 GNSS 設備之地表時序位移觀測，分析並驗證合成孔徑雷達干涉（InSAR）結果，將衛星級監測落地到坡地社區應用。",
              en: "Integrated GNSS time-series displacement observations to analyze and validate InSAR results, grounding satellite-grade monitoring in hillside-community applications." },
-    metrics: [ { v: "2 源", label: { zh: "GNSS＋InSAR 交叉驗證", en: "cross-validated sources" } } ],
-    stack: ["GNSS", "InSAR", "時序分析", "Python"],
+    metrics: [ { v: { zh: "2 源", en: "2" }, label: { zh: "GNSS＋InSAR 交叉驗證", en: "cross-validated sources" } } ],
+    stack: ["GNSS", "InSAR", "Time-Series Analysis", "Python"],
     tags: ["ts", "iot"], links: [], featured: false
   },
 
@@ -152,7 +152,7 @@ const PROJECTS = [
     metrics: [ { v: "85%+", label: { zh: "多數類別 mAP", en: "mAP (most classes)" } },
                { v: "24 hr", label: { zh: "SLA 修復承諾", en: "fix SLA" } },
                { v: "20k", label: { zh: "標註資料治理", en: "labels governed" } } ],
-    stack: ["YOLO/Darknet", "Edge AI", "IoT", "Docker", "SLA 維運"],
+    stack: ["YOLO/Darknet", "Edge AI", "IoT", "Docker", "SLA Operations"],
     tags: ["vision", "iot", "test"], links: [], featured: true
   },
   {
@@ -162,9 +162,9 @@ const PROJECTS = [
     desc:  { zh: "容器化影像辨識與 OCR 服務，辨識結果即時串流到 AR 眼鏡與指揮中心。", en: "Containerized vision & OCR services streaming results live to AR glasses and command centers." },
     detail:{ zh: "為特種搜救隊建置崩塌範圍辨識、噴漆文字 OCR、紅外線人員偵測與搜救進度紀錄之容器化服務與資料庫架構；開發即時串流整合框架，讓辨識結果同步顯示於 AR 眼鏡與指揮平台，系統部署於消防署雲端。另建置離線三維建模（維冠大樓場域驗證）與 Cesium 網頁圖磚展示。",
              en: "Built containerized services — landslide-extent recognition, spray-paint OCR, infrared human detection, rescue-progress logging — with the database schema; a real-time streaming framework renders results on AR glasses and the command platform, deployed on the agency cloud. Also delivered offline 3D reconstruction (validated on the Weiguan Building site) with Cesium web tiles." },
-    metrics: [ { v: "即時", label: { zh: "AR 眼鏡串流", en: "AR streaming" } },
-               { v: "4 種", label: { zh: "現場辨識模組", en: "field vision modules" } } ],
-    stack: ["Docker", "OCR", "串流整合", "AR", "Cesium"],
+    metrics: [ { v: { zh: "即時", en: "Live" }, label: { zh: "AR 眼鏡串流", en: "AR streaming" } },
+               { v: { zh: "4 種", en: "4" }, label: { zh: "現場辨識模組", en: "field vision modules" } } ],
+    stack: ["Docker", "OCR", "Streaming Integration", "AR", "Cesium"],
     tags: ["vision", "iot"], links: [], featured: true
   },
   {
@@ -200,8 +200,8 @@ const PROJECTS = [
              en: "A long-horizon Transformer takes CWA quantitative precipitation forecasts (station cell + 8 neighbors) and 12 hours of levels to predict the next hour at 10-minute steps across 5 stations; standardized cleaning, 10-min resampling and 7:2:1 splits, independently validated on Typhoon Gaemi (2024) and deployed — the reference case for the unified time-series module." },
     metrics: [ { v: "5", label: { zh: "IoT 觀測站", en: "IoT stations" } },
                { v: "7:2:1", label: { zh: "資料集切分", en: "train/val/test" } },
-               { v: "上線", label: { zh: "營運狀態", en: "in production" } } ],
-    stack: ["Transformer", "PyTorch", "IoT", "時序預測"],
+               { v: { zh: "上線", en: "Live" }, label: { zh: "營運狀態", en: "in production" } } ],
+    stack: ["Transformer", "PyTorch", "IoT", "Forecasting"],
     tags: ["ts", "iot", "test"], links: [], featured: true
   },
   {
@@ -223,8 +223,8 @@ const PROJECTS = [
     desc:  { zh: "即時頻譜比對馬達運轉狀態，偵測主頻衰減掌握生命週期。", en: "Live spectrogram comparison tracks dominant-frequency drift to assess motor lifecycle." },
     detail:{ zh: "對抽水馬達振動訊號做時頻分析：低頻區反映管段共振、高頻區反映馬達機械特徵；以主頻時間序列變化偵測運轉衰減與異常，支援設備維運決策。",
              en: "Time-frequency analysis of pump vibrations — low bands reflect pipe resonance, high bands motor mechanics; dominant-frequency drift over time flags degradation for maintenance decisions." },
-    metrics: [ { v: "時頻", label: { zh: "頻譜特徵追蹤", en: "spectrogram tracking" } } ],
-    stack: ["Python", "訊號處理", "IoT"],
+    metrics: [ { v: { zh: "時頻", en: "Spectral" }, label: { zh: "頻譜特徵追蹤", en: "spectrogram tracking" } } ],
+    stack: ["Python", "Signal Processing", "IoT"],
     tags: ["ts", "iot"], links: [], featured: false
   },
 
@@ -250,8 +250,8 @@ const PROJECTS = [
     desc:  { zh: "跨機關防救災資料倉儲與決策支援——支援水門啟閉等實際防汛決策。", en: "Cross-agency disaster data warehouse supporting real operational decisions like floodgate control." },
     detail:{ zh: "整合中央與地方防救災系統與監測資料的一站式決策平台：災防示警、IoT 監測與警戒分布、AI 颱洪／消防風險模擬與視覺化圖表。負責主資料庫開發（備援庫由協力團隊）、平台壓力測試與 GitLab CI；2023 年擔任擴充案資料分析組組長。EDP 的核心價值即是協助主管單位決策——包含水門啟閉等防汛操作。",
              en: "A one-stop decision platform unifying central/local disaster systems: alerts, IoT monitoring with warning zones, AI typhoon-flood and fire-risk simulation, and visual analytics. Owned the primary database (backup by a partner team), the platform's stress testing and GitLab CI; led the data-analysis team on the 2023 expansion. EDP exists to support command decisions — including floodgate operations." },
-    metrics: [ { v: "跨機關", label: { zh: "資料整合", en: "cross-agency data" } },
-               { v: "壓測", label: { zh: "平台級壓力測試", en: "platform stress tests" } } ],
+    metrics: [ { v: { zh: "跨機關", en: "Multi-agency" }, label: { zh: "資料整合", en: "cross-agency data" } },
+               { v: { zh: "壓測", en: "Stress-tested" }, label: { zh: "平台級壓力測試", en: "platform stress tests" } } ],
     stack: ["PostgreSQL", "GeoServer", "Leaflet", "Docker", "GitLab CI"],
     tags: ["platform", "test"], links: [], featured: true
   },
@@ -263,7 +263,7 @@ const PROJECTS = [
     detail:{ zh: "政府資料機敏、多數不可上雲：設計 AnythingLLM＋Ollama（含微調模型與 TAIDE）之開發／落地雙軌容器化架構；Prompt Engineering＋Function Calling 讓 LLM 將使用者問題轉為結構化 JSON、觸發後端 API 查詢政府資料庫後產出專業回覆。新北市消防局 POC 促成 2025 年正式簽約（業主為此配置 96GB VRAM AI 伺服器）；框架供多專案複用。同期建置公司內網 LLM 平台與 Whisper 會議轉寫，2024 下半年起導入 ChatGPT 輔助開發並撰寫 Claude 導入規範。",
              en: "With sensitive government data barred from the cloud, designed a dual-track (dev/prod) containerized stack on AnythingLLM + Ollama (incl. fine-tuned models and TAIDE). Prompt engineering + function calling turn questions into structured JSON that triggers backend APIs over government databases. The fire-department POC converted into a signed 2025 contract (the client provisioned a 96GB-VRAM AI server); the framework is reused across teams. Also built the intranet LLM platform and Whisper transcription, rolled out ChatGPT-assisted development from H2 2024 and authored Claude adoption guidelines." },
     metrics: [ { v: "96 GB", label: { zh: "業主配置 VRAM", en: "client-provisioned VRAM" } },
-               { v: "POC→約", label: { zh: "2025 正式簽約", en: "signed 2025" } } ],
+               { v: { zh: "POC→約", en: "POC→Deal" }, label: { zh: "2025 正式簽約", en: "signed 2025" } } ],
     stack: ["Ollama", "RAG", "Function Calling", "TAIDE", "Whisper", "Docker"],
     tags: ["llm", "platform"], links: [], featured: true
   },
@@ -274,7 +274,7 @@ const PROJECTS = [
     desc:  { zh: "模型交付週期由 3–4 個月縮短至 1 個月內，多專案直接複用。", en: "Model delivery cut from 3–4 months to under one month, reused across projects." },
     detail:{ zh: "把各專案重複開發的時序模型（資料清洗、10 分鐘等距採樣、7:2:1 切分、訓練與部署）標準化為公司統一模組；與遠傳電信協作部署雨量預測至台北市政府伺服器，台北市災害應變中心（EOC）與國道 ETC 維運等專案直接複用，並救回懸置多年的零人月遺留案。",
              en: "Standardized the recurring time-series stack (cleaning, 10-min resampling, 7:2:1 splits, training, deployment) into one company module; deployed rainfall prediction onto Taipei City servers with Far EasTone. Reused by the Taipei EOC and freeway-ETC maintenance projects — and rescued a long-stalled zero-budget legacy deliverable." },
-    metrics: [ { v: "→1 月", label: { zh: "交付週期（原 3–4 月）", en: "delivery (was 3–4 mo)" } } ],
+    metrics: [ { v: { zh: "→1 個月", en: "→1 mo" }, label: { zh: "交付週期（原 3–4 月）", en: "delivery (was 3–4 mo)" } } ],
     stack: ["Python", "Transformer", "PostgreSQL", "GitLab CI"],
     tags: ["ts", "platform", "test"], links: [], featured: false
   },
@@ -285,7 +285,7 @@ const PROJECTS = [
     desc:  { zh: "Grafana＋Loki＋Promtail 日誌中樞；機房／虛擬化／資安檢核全文件化。", en: "Grafana + Loki + Promtail log hub; datacenter, virtualization and security checks fully documented." },
     detail:{ zh: "導入 Grafana＋Loki＋Promtail 容器日誌收整（LogQL 查詢、容器監控儀表板），除錯集中定位；撰寫 tutorial-101 文件庫——Docker 安裝、ISMS 資安模組檢核、Proxmox VE 建機、實體機網路架構、本地 LLM 服務——新人照文件即可重建環境。",
              en: "Rolled out Grafana + Loki + Promtail container log aggregation (LogQL, dashboards) for centralized debugging; authored the tutorial-101 docs — Docker setup, ISMS security checks, Proxmox VE provisioning, physical network layout, local LLM service — so environments rebuild from docs alone." },
-    metrics: [ { v: "1 處", label: { zh: "日誌集中查詢", en: "central log search" } } ],
+    metrics: [ { v: { zh: "1 處", en: "One pane" }, label: { zh: "日誌集中查詢", en: "central log search" } } ],
     stack: ["Grafana", "Loki", "Promtail", "Proxmox VE", "ISMS"],
     tags: ["platform", "test"], links: [], featured: false
   },
@@ -307,7 +307,7 @@ const PROJECTS = [
     desc:  { zh: "文章發布機器人、API 整合測試與探索性測試，上線前回報並驗證修復。", en: "Publishing bot, API integration tests and exploratory testing — bugs reported and fixes verified pre-launch." },
     detail:{ zh: "擔任平台 Beta 上線的後端貢獻者：開發文章發布機器人串接內容 API、對新 API 端點撰寫整合測試，並執行探索性測試，於上線前回報錯誤並驗證修復——把測試工程習慣帶進社群產品。",
              en: "Backend contributor for the beta launch: built a publishing bot against the content API, wrote integration tests for new endpoints, and ran exploratory testing — reporting bugs and verifying fixes before launch." },
-    metrics: [], stack: ["Python", "REST API", "整合測試"], tags: ["test", "web"], links: [{ label: { zh: "平台", en: "Platform" }, url: "https://mosir.app" }], featured: false
+    metrics: [], stack: ["Python", "REST API", "Integration Testing"], tags: ["test", "web"], links: [{ label: { zh: "平台", en: "Platform" }, url: "https://mosir.app" }], featured: false
   },
   {
     id: "magical-mirai", band: "more", icon: "🎤", period: "2025",
@@ -325,7 +325,7 @@ const PROJECTS = [
     desc:  { zh: "以非負矩陣分解預測求職者偏好職缺。", en: "Predicting job preferences with non-negative matrix factorization." },
     detail:{ zh: "於 104 人力銀行黑客松以非負矩陣分解（NMF）建模求職者與職缺的隱含關聯，產出職缺推薦。",
              en: "Modeled latent jobseeker–job affinities with NMF at the HACK104 hackathon to generate recommendations." },
-    metrics: [], stack: ["Python", "NMF", "推薦系統"], tags: ["ts"], links: [], featured: false
+    metrics: [], stack: ["Python", "NMF", "RecSys"], tags: ["ts"], links: [], featured: false
   },
   {
     id: "pixnet-bot", band: "more", icon: "💬", period: "2017",
@@ -394,13 +394,13 @@ const TIMELINE = [
 /* ---------- 技能 ---------- */
 const SKILLS = [
   { g: { zh: "測試與品質", en: "Testing & Quality" },
-    items: ["測試計畫撰寫", "unittest / pytest", "SIT / UAT", "壓力測試", "SonarQube", "GitLab CI/CD", "標註規範", "SLA 維運"] },
+    items: ["Test Planning", "unittest / pytest", "SIT / UAT", "Stress Testing", "SonarQube", "GitLab CI/CD", "Annotation Standards", "SLA Operations"] },
   { g: { zh: "程式語言", en: "Languages" },
     items: ["Python", "SQL / PostgreSQL", "C++", "Node.js", "Golang", "R", "Java", "C#"] },
   { g: { zh: "雲端與基礎設施", en: "Cloud & Infra" },
     items: ["Docker", "Kubernetes", "Terraform", "GCP", "AWS", "Airflow", "Proxmox VE", "Grafana / Loki", "RabbitMQ", "FastAPI"] },
   { g: { zh: "AI / 機器學習", en: "AI / ML" },
-    items: ["PyTorch", "YOLO / Mask R-CNN / U-Net", "Transformer 時序", "ConvLSTM", "LLM（RAG / 微調 / Function Calling）", "Whisper", "LiDAR / SLAM", "NVIDIA Jetson"] }
+    items: ["PyTorch", "YOLO / Mask R-CNN / U-Net", "Transformer Forecasting", "ConvLSTM", "LLM (RAG / Fine-tuning / Function Calling)", "Whisper", "LiDAR / SLAM", "NVIDIA Jetson"] }
 ];
 
 /* ---------- 獎項與認證 ---------- */
@@ -418,7 +418,7 @@ const HONORS = [
 const TAGS = [
   { id: "all",      label: { zh: "全部", en: "All" } },
   { id: "vision",   label: { zh: "視覺 AI", en: "Vision" } },
-  { id: "ts",       label: { zh: "時序預測", en: "Time series" } },
+  { id: "ts",       label: { zh: "Forecasting", en: "Time series" } },
   { id: "llm",      label: { zh: "LLM", en: "LLM" } },
   { id: "iot",      label: { zh: "IoT／邊緣", en: "IoT / Edge" } },
   { id: "platform", label: { zh: "平台", en: "Platform" } },

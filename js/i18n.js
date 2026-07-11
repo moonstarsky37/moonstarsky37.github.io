@@ -1,5 +1,6 @@
 /* i18n.js — 靜態介面字串字典。lang: 'zh' | 'en' */
 const I18N = {
+  "doc.title":      { zh: "黃梓育 Zi-Yu Huang — GeoAI × 測試自動化作品集", en: "Zi-Yu Huang — GeoAI × Test Automation Portfolio" },
   "nav.projects":   { zh: "專案", en: "Projects" },
   "nav.core":       { zh: "資料中樞", en: "Data Core" },
   "nav.timeline":   { zh: "經歷", en: "Journey" },
