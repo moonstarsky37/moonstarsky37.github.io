@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" data-lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>黃梓育 Zi-Yu Huang — GeoAI × Test Automation Portfolio</title>
+<meta name="description" content="從衛星軌道到下水道的 AI 系統作品集：GeoAI、測試自動化、發明專利 TronCube。Portfolio of Zi-Yu (David) Huang — GeoAI systems from orbit to underground.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🛰%3C/text%3E%3C/svg%3E">
+<meta property="og:title" content="Zi-Yu Huang — From Orbit to Underground">
+<meta property="og:description" content="GeoAI × Test Automation portfolio. 12 projects/yr, invention patent I925616, LLM POC → signed contract.">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- 星空（捲動淡出） -->
+<canvas id="stars" aria-hidden="true"></canvas>
+
+<!-- 頂部導覽 -->
+<nav id="topnav" aria-label="main">
+  <a class="brand" href="#top">ZY<span>·</span>H</a>
+  <div class="navlinks">
+    <a href="#band-space" data-i18n="nav.projects"></a>
+    <a href="#band-core" data-i18n="nav.core"></a>
+    <a href="#timeline" data-i18n="nav.timeline"></a>
+    <a href="#more" data-i18n="nav.more"></a>
+    <a href="#skills" data-i18n="nav.skills"></a>
+    <a href="#contact" data-i18n="nav.contact"></a>
+  </div>
+  <button id="langBtn" type="button" aria-label="switch language">EN</button>
+</nav>
+
+<!-- 高度尺（桌機） -->
+<aside id="altRail" aria-hidden="true">
+  <div class="alt-line"></div>
+  <div class="alt-current"><span id="altValue">700 km</span><em id="altName">Orbit</em></div>
+</aside>
+
+<!-- 手機頂部進度條 -->
+<div id="descentBar" aria-hidden="true"><i></i></div>
+
+<main id="top">
+
+  <!-- HERO：深空 -->
+  <header class="hero" id="hero">
+    <p class="eyebrow" data-i18n="hero.eyebrow"></p>
+    <h1><span data-i18n="hero.name"></span><small data-i18n="hero.name.sub"></small></h1>
+    <p class="tagline" data-i18n="hero.tagline"></p>
+    <p class="intro" data-i18n="hero.intro"></p>
+
+    <div class="cta">
+      <a class="btn solid" href="resume/" data-i18n="hero.resume"></a>
+      <a class="btn" href="https://github.com/moonstarsky37" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn" href="https://www.linkedin.com/in/davidhuang0304" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn" href="https://scholar.google.com/citations?user=RNvt85EAAAAJ" target="_blank" rel="noopener">Scholar</a>
+      <a class="btn" href="mailto:moon.starsky37@gmail.com">Email</a>
+    </div>
+
+    <div class="stats" id="stats"></div>
+
+    <a class="scroll-hint" href="#band-space"><span data-i18n="hero.scroll"></span><i>▾</i></a>
+  </header>
+
+  <!-- 篩選列（sticky） -->
+  <div id="filterbar" role="toolbar" aria-label="project filter">
+    <span class="filter-label" data-i18n="filter.label"></span>
+    <div id="filterChips"></div>
+  </div>
+
+  <!-- 高度帶：由 main.js 依 BANDS/PROJECTS 渲染 -->
+  <div id="bands"></div>
+
+  <!-- 六階段流程（渲染於 core band 之後） -->
+  <template id="flowTpl">
+    <section class="flow reveal">
+      <h3 data-i18n="core.flow.title"></h3>
+      <ol class="flowline">
+        <li><span data-i18n="core.flow.s1"></span></li>
+        <li><span data-i18n="core.flow.s2"></span></li>
+        <li><span data-i18n="core.flow.s3"></span></li>
+        <li><span data-i18n="core.flow.s4"></span></li>
+        <li class="hot"><span data-i18n="core.flow.s5"></span></li>
+        <li><span data-i18n="core.flow.s6"></span></li>
+      </ol>
+      <p class="flownote" data-i18n="core.flow.note"></p>
+    </section>
+  </template>
+
+  <!-- 經歷時間軸 -->
+  <section id="timeline" class="section">
+    <h2 data-i18n="timeline.title"></h2>
+    <p class="section-sub" data-i18n="timeline.sub"></p>
+    <ol id="timelineList" class="tl"></ol>
+  </section>
+
+  <!-- 更多作品 -->
+  <section id="more" class="section">
+    <h2 data-i18n="more.title"></h2>
+    <p class="section-sub" data-i18n="more.sub"></p>
+    <div id="moreGrid" class="grid"></div>
+  </section>
+
+  <!-- 技能 -->
+  <section id="skills" class="section">
+    <h2 data-i18n="skills.title"></h2>
+    <div id="skillGroups" class="skillwrap"></div>
+  </section>
+
+  <!-- 獎項 -->
+  <section id="honors" class="section">
+    <h2 data-i18n="honors.title"></h2>
+    <ul id="honorList" class="honors"></ul>
+  </section>
+
+  <!-- 聯絡 -->
+  <section id="contact" class="section contact">
+    <h2 data-i18n="contact.title"></h2>
+    <p class="section-sub" data-i18n="contact.sub"></p>
+    <div class="cta">
+      <a class="btn solid" href="mailto:moon.starsky37@gmail.com">moon.starsky37@gmail.com</a>
+      <a class="btn" href="https://github.com/moonstarsky37" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn" href="https://www.linkedin.com/in/davidhuang0304" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </section>
+
+  <footer>
+    <p data-i18n="footer.built"></p>
+    <p><span data-i18n="footer.updated"></span>：<time id="lastUpdated"></time>｜© Zi-Yu Huang</p>
+  </footer>
+</main>
+
+<!-- 專案 Modal -->
+<div id="modal" class="modal" hidden>
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+    <button class="modal-x" type="button" data-close aria-label="close">✕</button>
+    <p class="m-meta"><span id="mIcon"></span><span id="mOrg"></span>・<span id="mPeriod"></span></p>
+    <h3 id="mTitle"></h3>
+    <p id="mDetail"></p>
+    <div class="m-sec"><h4 data-i18n="modal.metrics"></h4><div id="mMetrics" class="m-metrics"></div></div>
+    <div class="m-sec"><h4 data-i18n="modal.stack"></h4><div id="mStack" class="chips"></div></div>
+    <div class="m-sec" id="mLinkSec"><h4 data-i18n="modal.links"></h4><div id="mLinks" class="m-links"></div></div>
+  </div>
+</div>
+
+<script src="js/projects.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Zi-Yu Huang — Resume (ATS)</title>
+<style>
+  /* ATS-first design: single column, no tables/flex for content, standard headings,
+     system fonts, plain-text contact line. Prints to a clean 2-page A4 PDF. */
+  @page { size: A4; margin: 14mm 16mm; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: Arial, Helvetica, "Noto Sans", sans-serif;
+    font-size: 10pt; line-height: 1.42; color: #111;
+    max-width: 180mm; margin: 0 auto; padding: 12px;
+  }
+  h1 { font-size: 16pt; letter-spacing: .5px; }
+  .target { font-size: 10.5pt; font-weight: bold; margin-top: 2px; }
+  .contact { font-size: 9pt; margin-top: 3px; color: #222; }
+  h2 {
+    font-size: 10.5pt; text-transform: uppercase; letter-spacing: 1.2px;
+    border-bottom: 1.2px solid #333; margin: 12px 0 5px; padding-bottom: 2px;
+  }
+  h3 { font-size: 10pt; margin: 8px 0 1px; }
+  .meta { font-size: 9.2pt; color: #333; margin-bottom: 2px; }
+  ul { padding-left: 16px; margin: 3px 0 6px; }
+  li { margin-bottom: 2.5px; }
+  p { margin-bottom: 4px; }
+  .kw p { margin-bottom: 2.5px; }
+  @media print { body { padding: 0; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>ZI-YU (DAVID) HUANG</h1>
+  <div class="target">AI Engineering Manager | Test Automation &amp; MLOps | Python</div>
+  <div class="contact">Taipei, Taiwan | moon.starsky37@gmail.com | linkedin.com/in/davidhuang0304 | github.com/moonstarsky37 | Google Scholar: scholar.google.com/citations?user=RNvt85EAAAAJ</div>
+</header>
+
+<h2>Professional Summary</h2>
+<p>Engineering manager with 6+ years of Python development (5+ years full-time industry) specializing in AI systems, test automation, and MLOps. Led a team of 3&ndash;4 engineers delivering 12 government and enterprise projects in 2024, each shipped with a formal test plan and passing client user acceptance testing (UAT) and system integration testing (SIT). Co-inventor of Taiwan Invention Patent No. I925616 for TronCube, a 17-microservice geospatial data-warehouse platform with automated test suites and GitLab CI/CD. Reduced AI model delivery cycles by 70% (3&ndash;4 months to under 1 month) through module standardization, and converted an on-premises LLM proof of concept into a signed government contract.</p>
+
+<h2>Core Competencies</h2>
+<div class="kw">
+<p><b>Testing &amp; Quality:</b> Test Automation, Test Plan Authoring, Unit Testing (unittest, pytest), Integration Testing, Stress Testing, System Integration Testing (SIT), User Acceptance Testing (UAT), SonarQube Quality Gates, CI/CD (GitLab CI), Test Dataset Design, Annotation Standards, Defect Tracking, SLA Operations</p>
+<p><b>Programming:</b> Python, SQL (PostgreSQL), C++, Node.js, Golang, R, Java, RESTful API (FastAPI, Swagger)</p>
+<p><b>Cloud &amp; Infrastructure:</b> Docker, Kubernetes, Terraform, Google Cloud Platform (GCP), AWS, Airflow, Proxmox VE, Grafana, Loki, RabbitMQ, PgBouncer, GeoServer, Infrastructure as Code, Observability, MLOps</p>
+<p><b>AI / Machine Learning:</b> PyTorch, Computer Vision (YOLO, Mask R-CNN, U-Net, Detectron2, OCR), Time-Series Forecasting (Transformer, ConvLSTM), Large Language Models (RAG, Fine-Tuning, Function Calling, Ollama, Whisper), LiDAR Point Clouds, Remote Sensing, Edge AI (NVIDIA Jetson, DeepStream)</p>
+<p><b>Leadership:</b> Team Management, Cross-Functional Collaboration, Matrixed Organizations, Client Delivery, Technical Training (English), Patent Drafting</p>
+</div>
+
+<h2>Professional Experience</h2>
+
+<h3>Independent Software Engineer (Freelance)</h3>
+<div class="meta">Taipei, Taiwan | Jun 2025 &ndash; Present</div>
+<ul>
+  <li>Built a Python dividend-reinvestment modeling tool for a private client, projecting long-term share accumulation and total cost basis for a listed financial-holding stock from annual contributions, cash and stock dividends, and annual average market prices; delivered a companion Google Sheets version for spreadsheet-based users.</li>
+  <li>Backend contributor for the beta launch of mosir.app, a social micro-blogging content platform: built an article-posting bot integrating the platform's content APIs, ran integration tests against new API endpoints, and performed exploratory QA of the platform, reporting and verifying bug fixes pre-release.</li>
+  <li>Team entrant in the Magical Mirai 2025 Programming Contest (Tokyo), building an interactive lyric-driven web application on the TextAlive App API.</li>
+</ul>
+
+<h3>Section Manager (AI), Remote Sensing &amp; AI Solutions &mdash; ThinkTron Ltd.</h3>
+<div class="meta">Taipei, Taiwan (geospatial-AI joint venture of Kokusai Kogyo (KKC), Japan, and Sinotech Engineering Consultants, Taiwan) | Jan 2023 &ndash; May 2025</div>
+<ul>
+  <li>Led a team of 3&ndash;4 AI engineers delivering <b>12 government and enterprise projects in 2024</b> while operating 25+ geospatial data services.</li>
+  <li>Institutionalized quality engineering: every delivery shipped a <b>formal written test plan</b> and passed <b>client UAT and SIT</b>; all project code passed <b>SonarQube quality gates</b>; defined a six-stage R&amp;D process covering unit, integration, and stress testing with defect tracking.</li>
+  <li>Architected <b>TronCube</b>, a geospatial data-warehouse product of <b>17 microservices</b> with unittest/pytest suites, one-command test targets, and GitLab CI; <b>co-inventor of Taiwan Invention Patent No. I925616</b>; adopted by 4+ government projects.</li>
+  <li>Re-scoped the New Taipei City disaster-response cloud platform to RESTful-API system integration when contractor hardware stalled, shipping on schedule and <b>saving ~2.3 person-months</b>.</li>
+  <li>Unified the company's time-series AI modules, <b>cutting model delivery from 3&ndash;4 months to under 1 month</b>; personally built the Taipei sewer water-level forecasting model (Transformer), validated on Typhoon Gaemi (2024) and <b>deployed to production</b>.</li>
+  <li>Delivered an on-premises <b>LLM proof of concept for the New Taipei City Fire Department that converted into a signed 2025 contract</b>; rolled out ChatGPT-assisted development team-wide and authored Claude adoption guidelines.</li>
+  <li>Presented 3 technical topics at the KKC symposium in Tokyo; delivered 4+ <b>English-language training courses</b> for APRSAF (Asia-Pacific space agencies forum) and enterprise clients in Vietnam.</li>
+</ul>
+
+<h3>AI Algorithm Engineer &mdash; ThinkTron Ltd.</h3>
+<div class="meta">Taipei, Taiwan | Mar 2020 &ndash; Jan 2023</div>
+<ul>
+  <li>Built containerized image-recognition and OCR services for the National Fire Agency's 5G AI rescue platform, streaming results in real time to <b>AR glasses</b> and the command center; deployed on the agency cloud for search-and-rescue teams.</li>
+  <li>Developed a nationwide rainfall nowcasting system (ConvLSTM) producing <b>3-hour forecasts every 10 minutes</b>, feeding flood simulation via RESTful APIs; designed per-source error logging; operated reliably for multiple years.</li>
+  <li>Automated road-feature extraction (poles, lane markings) from LiDAR point clouds with SLAM for a Ministry of Economic Affairs HD-map program; defined annotation standards covering <b>5 object classes with 200+ labeled samples each</b>; techniques entered the company patent portfolio.</li>
+  <li>Developed nearly all recognition models for a subscription AI pavement-inspection service (most classes at <b>85%+ mAP</b>) and integrated in-vehicle edge hardware; supported commercial operations under a 24-hour-fix SLA.</li>
+  <li>Served as project and technical lead for an underground heritage-tunnel monitoring service (stereo camera + NVIDIA Jetson, IP66 enclosures, 4G uplink, real-time deformation measurement, earthquake alerts) &mdash; signed and delivered.</li>
+  <li>Achieved <b>95%+ validation accuracy</b> with a Mask R-CNN landslide-detection model; built an aerial-image labeling and expert-review toolchain for the Forestry Agency, semi-automating a fully manual interpretation workflow.</li>
+</ul>
+
+<h3>Earlier Experience</h3>
+<ul>
+  <li><b>Military Service</b>, Taiwan | Sep 2019 &ndash; Mar 2020.</li>
+  <li><b>AI R&amp;D Intern &mdash; ThinkTron Ltd.</b>, Taipei | Jun 2019 &ndash; Sep 2019. Developed data-processing and visualization components; contributed to the company entry that won the Taiwan R&amp;D Award at the 2019 Asia Open Data Challenge.</li>
+  <li><b>AI R&amp;D Intern &mdash; Coretronic Corp.</b>, Hsinchu | Jun 2018 &ndash; Aug 2018. UAV aerial-image object detection; 2D image segmentation models.</li>
+  <li><b>Full-Stack Developer &mdash; Industry-Academia Cooperation (Export Trade System)</b>, Taipei | Jul 2016 &ndash; Jun 2017. Node.js service development, relational database design, and production deployment.</li>
+</ul>
+
+<h2>Education</h2>
+<ul>
+  <li><b>National Taiwan University</b> &mdash; M.S., Industrial Engineering | Aug 2017 &ndash; Aug 2019. Thesis (with National Taiwan University Hospital, on hospital-provided CT data): 3D medical-image segmentation using sequential fully convolutional deep-learning networks.</li>
+  <li><b>National Chengchi University</b> &mdash; B.S., Mathematical Sciences (dept. rank 3 of ~45, top 7%; GPA 3.82/4.00) and B.B.A., Information Management (double major) | Aug 2013 &ndash; Jun 2017.</li>
+</ul>
+
+<h2>Patent &amp; Selected Publications</h2>
+<ul>
+  <li><b>Taiwan Invention Patent No. I925616</b>, "Geospatial Data Processing System and Method" (co-inventor; filed 2025, granted 2026, term to 2045); led patent drafting and filing.</li>
+  <li><i>Variational Grid Setting Network</i>, IEEE IALP 2017 &mdash; first author, oral presentation (Singapore).</li>
+  <li>Two journal articles (2021) on AI for road-asset management and slope monitoring &mdash; J. CICHE 48(2); Geological Quarterly 40.</li>
+</ul>
+
+<h2>Certifications, Honors &amp; Languages</h2>
+<ul>
+  <li><b>26 Google Cloud skill badges</b> (Kubernetes, Terraform, BigQuery, Cloud Security, and more); <b>2 NVIDIA Deep Learning Institute certificates</b> (Jetson Nano, DeepStream).</li>
+  <li>Finalist (captain, 6-person team), "City Dashboard" Hackathon, Taipei Coding Festival 2023; Best Paper Award, IISE Asia 2018; invited speaker, PyCon Taiwan.</li>
+  <li>Languages: Mandarin Chinese (native); English (professional working proficiency &mdash; international presentations and 4+ courses taught in English); Japanese (basic).</li>
+</ul>
+
+</body>
+</html>
