@@ -366,13 +366,26 @@ const PROJECTS = [
     metrics: [], stack: ["Node.js", "MySQL", "EJS", "Android/Java"], tags: ["web"], links: [], featured: false
   },
   {
-    id: "csharp-ml", band: "more", icon: "🧮", period: "2017",
-    org: { zh: "研究所課程作品", en: "Graduate coursework" },
+    id: "csharp-ml", band: "more", icon: "🧮", period: "2017 → 2026",
+    org: { zh: "研究所課程作品（2026 翻新開源）", en: "Graduate coursework (rebuilt & open-sourced 2026)" },
     title: { zh: "C# 模糊推論與神經網路視覺化", en: "Fuzzy Inference & NN Visualizer in C#" },
-    desc:  { zh: "Windows 桌面版 Fuzzy Inference System 與 MLP 訓練過程即時視覺化。", en: "Desktop fuzzy-inference system and real-time MLP training visualization." },
-    detail:{ zh: "以 C# 實作 Mamdani／Sugeno 模糊推論系統（含 2D I/O 曲面圖）與 MLP 分類器，即時繪出權重、偏差與誤差收斂——把黑盒子攤開來看。",
-             en: "Implemented Mamdani/Sugeno fuzzy-inference systems (with 2D I/O surface plots) and an MLP classifier in C#, live-rendering weights, biases and error convergence — opening the black box." },
-    metrics: [], stack: ["C#", "WinForms", "MLP", "Fuzzy Logic"], tags: ["vision"], links: [], featured: false
+    desc:  { zh: "Windows 桌面版模糊集合設計與隸屬函數視覺化，2026 以 .NET 8 + ScottPlot 翻新開源。", en: "Desktop fuzzy-set design and membership-function visualization, rebuilt on .NET 8 + ScottPlot and open-sourced in 2026." },
+    detail:{ zh: "以 C# 實作模糊集合工作站（十種隸屬函數、PropertyGrid 即時調參）與隸屬函數比較器；2026 從 .NET Framework 4.6.1 + MSChart 遷移至 .NET 8 + ScottPlot 5,並修正原版高斯 σ² 等數學 bug 後開源。",
+             en: "A fuzzy-set workbench (ten membership types with live PropertyGrid tuning) and a membership-function comparator in C#; migrated in 2026 from .NET Framework 4.6.1 + MSChart to .NET 8 + ScottPlot 5, fixing the original Gaussian σ² math bug along the way." },
+    metrics: [], stack: ["C#", ".NET 8", "WinForms", "ScottPlot", "Fuzzy Logic"], tags: ["vision"],
+    links: [{ label: { zh: "Fuzzy Set Studio", en: "Fuzzy Set Studio" }, url: "https://github.com/moonstarsky37/fuzzy-set-studio" },
+            { label: { zh: "MF Visualizer", en: "MF Visualizer" }, url: "https://github.com/moonstarsky37/mf-visualizer" }], featured: false
+  },
+  {
+    id: "liver3d-viewer", band: "more", icon: "🫀", period: "2017 → 2026",
+    org: { zh: "台大碩論輔助工具（2026 翻新開源）", en: "NTU thesis helper tool (rebuilt & open-sourced 2026)" },
+    title: { zh: "肝臟 3D 點雲檢視器", en: "Liver 3D Point-Cloud Viewer" },
+    desc:  { zh: "把逐切片肝臟分割遮罩堆疊重建成可旋轉 3D 點雲，碩論研究的目視驗證工具。", en: "Stacks per-slice liver segmentation masks into a rotatable 3D point cloud — the eyeball-check tool from my thesis research." },
+    detail:{ zh: "碩論《以連續影像全卷積深度學習網路圈選3D醫學影像之研究》（與台大醫院合作，65 例腹部 CT）研究期間，用來快速確認逐切片分割結果堆疊後的 3D 形狀是否合理。原為 Python 3.6 PyInstaller 單檔工具，2026 重構為 uv 套件：幾何核心與 Qt 解耦、headless pytest、PyQt6。",
+             en: "Built during my thesis (Consecutive Convolutional Network for 3D Medical Image Segmentation, with NTUH, 65 abdominal CT cases) to sanity-check that per-slice masks stack into plausible anatomy. Originally a Python 3.6 PyInstaller tool; rebuilt in 2026 as a uv package with a Qt-decoupled, headless-tested geometry core." },
+    metrics: [], stack: ["Python", "uv", "PyQt6", "pyqtgraph", "NumPy"], tags: ["vision"],
+    links: [{ label: { zh: "GitHub", en: "GitHub" }, url: "https://github.com/moonstarsky37/liver3d-viewer" },
+            { label: { zh: "論文", en: "Thesis" }, url: "https://tdr.lib.ntu.edu.tw/jspui/handle/123456789/77270" }], featured: false
   }
 ];
 
