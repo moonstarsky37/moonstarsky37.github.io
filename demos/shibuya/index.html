@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shibuya 3D City Viewer — 渋谷を、まるごと3Dで。</title>
+<meta name="description" content="国土交通省 PLATEAU の3D都市モデルを CesiumJS で描画する、渋谷の3Dシティビューア・デモ。ブラウザだけで都市を俯瞰できます。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  /* ================================================================
+     jp-ui-design / 現代企業科技
+     配色（colors.md 組A・3色上限）：
+       底色  白練 (shironeri)  #FCFAF2  rgb(252,250,242)
+       主文字 褐 (kachiiro)    #08192D  rgb(8,25,45)
+       強調  瑠璃 (ruri)       #005CAF  rgb(0,92,175)
+     層次は上記3色の rgba 変体のみで作る。新色は追加しない。
+     ================================================================ */
+  :root{
+    --bg:      #FCFAF2;
+    --ink:     #08192D;
+    --accent:  #005CAF;
+    --ink-60:  rgba(8,25,45,.60);
+    --ink-12:  rgba(8,25,45,.12);
+    --ink-06:  rgba(8,25,45,.06);
+    --accent-40: rgba(0,92,175,.40);
+    --accent-12: rgba(0,92,175,.12);
+    --accent-06: rgba(0,92,175,.06);
+    --paper-90: rgba(252,250,242,.90);
+    --paper-60: rgba(252,250,242,.60);
+  }
+
+  *,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Noto Sans JP',"Hiragino Kaku Gothic ProN",sans-serif;
+    font-weight:400;
+    line-height:1.9;                 /* 内文行高 1.8〜2.0 */
+    letter-spacing:.04em;            /* 正文 0.02〜0.05em */
+    -webkit-font-smoothing:antialiased;
+    font-feature-settings:"palt";
+  }
+
+  img{ max-width:100%; height:auto; display:block; }
+  a{ color:var(--accent); text-decoration:none; }
+
+  h1,h2,h3{
+    line-height:1.5;                 /* 標題行高 1.4〜1.6 */
+    letter-spacing:.06em;            /* 標題 0.05〜0.1em */
+    font-weight:700;
+  }
+
+  .container{
+    max-width:1120px;
+    margin-inline:auto;
+    padding-inline:32px;
+  }
+
+  /* ---------- header ---------- */
+  .site-header{
+    position:sticky; top:0; z-index:50;
+    background:var(--bg);
+    border-bottom:1px solid var(--ink-12);   /* 装飾線（手法②） */
+  }
+  .site-header .container{
+    display:flex; align-items:center; justify-content:space-between;
+    height:72px;
+  }
+  .brand{
+    display:flex; align-items:baseline; gap:12px;
+    color:var(--ink); font-weight:700; letter-spacing:.08em;
+    font-size:1rem;
+  }
+  .brand .en{
+    font-size:.68rem; font-weight:500; color:var(--accent);
+    letter-spacing:.18em;
+  }
+  .global-nav{ display:flex; align-items:center; gap:40px; }
+  .global-nav a{
+    color:var(--ink); font-size:.88rem; font-weight:500;
+    letter-spacing:.08em;
+  }
+  .global-nav a:hover{ color:var(--accent); }
+  .global-nav .nav-cta{
+    color:var(--accent);
+    border:1px solid var(--accent-40);
+    padding:8px 20px; border-radius:2px;
+  }
+  .global-nav .nav-cta:hover{ background:var(--accent-06); }
+
+  /* ---------- hero（手法①半滿版＋手法②装飾線・色塊） ---------- */
+  .hero{
+    position:relative;
+    overflow:hidden;
+    padding-block:150px;             /* section 上下 ≥140px */
+  }
+  .hero-deco{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    pointer-events:none;
+  }
+  .hero .container{
+    position:relative;
+    display:grid;
+    grid-template-columns:1fr 1fr;   /* 半滿版：左文右圖 */
+    gap:64px;
+    align-items:center;
+  }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:12px;
+    font-size:.72rem; font-weight:500; letter-spacing:.22em;
+    color:var(--accent);
+    margin-bottom:32px;
+  }
+  .eyebrow::before{
+    content:""; width:32px; height:1px; background:var(--accent); /* 装飾線 */
+  }
+  .hero h1{
+    font-size:clamp(2.1rem,4.2vw,3.3rem);
+    margin-bottom:28px;
+  }
+  .hero h1 .accent{ color:var(--accent); }
+  .hero .lead{
+    color:var(--ink-60);
+    max-width:30em;
+    margin-bottom:48px;
+  }
+  .cta-row{ display:flex; align-items:center; gap:32px; flex-wrap:wrap; }
+  .btn-primary{
+    display:inline-block;
+    background:var(--accent); color:var(--bg);
+    font-weight:500; letter-spacing:.1em; font-size:.92rem;
+    padding:16px 44px; border-radius:2px;
+    transition:opacity .2s ease;
+  }
+  .btn-primary:hover{ opacity:.85; }
+  .link-arrow{
+    font-size:.88rem; font-weight:500; letter-spacing:.08em;
+  }
+  .link-arrow::after{ content:"→"; margin-left:8px; }
+  .hero-media figure{ margin:0; }
+  .hero-media img{
+    width:100%;
+    border-radius:4px;
+  }
+  .hero-media figcaption{
+    margin-top:16px;
+    font-size:.72rem; letter-spacing:.12em;
+    color:var(--ink-60);
+    display:flex; align-items:center; gap:10px;
+  }
+  .hero-media figcaption::before{
+    content:""; width:20px; height:1px; background:var(--accent-40); /* 装飾線 */
+  }
+
+  /* ---------- section 共通 ---------- */
+  .section{ padding-block:150px; }    /* ≥140px */
+  .section-head{ margin-bottom:88px; }
+  .section-label{
+    display:inline-flex; align-items:center; gap:12px;
+    font-size:.72rem; font-weight:500; letter-spacing:.22em;
+    color:var(--accent);
+    margin-bottom:20px;
+  }
+  .section-label::before{
+    content:""; width:32px; height:1px; background:var(--accent);
+  }
+  .section-head h2{ font-size:clamp(1.6rem,3vw,2.2rem); }
+
+  /* ---------- features ---------- */
+  .features{ background:var(--accent-06); }  /* 色塊（手法②） */
+  .feature-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:56px;
+  }
+  .feature-num{
+    font-size:.78rem; font-weight:500; letter-spacing:.2em;
+    color:var(--accent);
+    display:flex; align-items:center; gap:12px;
+    margin-bottom:28px;
+  }
+  .feature-num::after{
+    content:""; flex:1; height:1px; background:var(--accent-12); /* 装飾線 */
+  }
+  .feature-icon{ margin-bottom:28px; color:var(--accent); }
+  .feature-card h3{
+    font-size:1.12rem; font-weight:700;
+    margin-bottom:16px;
+  }
+  .feature-card p{
+    font-size:.92rem;
+    color:var(--ink-60);
+  }
+
+  /* ---------- get started ---------- */
+  .start .container{
+    display:grid;
+    grid-template-columns:5fr 6fr;
+    gap:72px;
+    align-items:start;
+  }
+  .step-list{ list-style:none; counter-reset:step; margin-bottom:56px; }
+  .step-list li{
+    counter-increment:step;
+    display:flex; gap:24px;
+    padding-block:24px;
+    border-bottom:1px solid var(--ink-12);   /* 装飾線 */
+  }
+  .step-list li::before{
+    content:"0" counter(step);
+    font-size:.8rem; font-weight:500; letter-spacing:.15em;
+    color:var(--accent);
+    line-height:2.2;
+    flex-shrink:0;
+  }
+  .step-list strong{
+    display:block; font-weight:700; letter-spacing:.06em;
+  }
+  .step-list span{ font-size:.88rem; color:var(--ink-60); }
+  .terminal{
+    background:var(--ink);
+    border-radius:4px;
+    padding:32px 36px;
+    overflow-x:auto;
+  }
+  .terminal-bar{
+    display:flex; gap:8px; margin-bottom:24px;
+  }
+  .terminal-bar i{
+    width:10px; height:10px; border-radius:50%;
+    background:var(--paper-60); opacity:.35;
+  }
+  .terminal pre{
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:.85rem; line-height:2.1; letter-spacing:.02em;
+    color:var(--paper-90);
+  }
+  .terminal .prompt{ color:var(--paper-60); user-select:none; }
+  .terminal .comment{ color:var(--paper-60); }
+
+  /* ---------- footer ---------- */
+  .site-footer{
+    background:var(--ink);
+    color:var(--paper-90);
+    padding-block:88px;
+  }
+  .footer-grid{
+    display:flex; justify-content:space-between; gap:48px;
+    flex-wrap:wrap;
+    margin-bottom:72px;
+  }
+  .footer-brand .brand{ color:var(--paper-90); margin-bottom:20px; }
+  .footer-brand p{
+    font-size:.82rem; color:var(--paper-60); max-width:34em;
+  }
+  .footer-nav{ display:flex; gap:56px; }
+  .footer-nav h4{
+    font-size:.72rem; font-weight:500; letter-spacing:.2em;
+    color:var(--paper-60); margin-bottom:20px;
+  }
+  .footer-nav a{
+    display:block;
+    color:var(--paper-90); font-size:.88rem;
+    margin-bottom:12px; letter-spacing:.06em;
+  }
+  .footer-nav a:hover{ color:var(--bg); text-decoration:underline; }
+  .footer-bottom{
+    border-top:1px solid rgba(252,250,242,.15);
+    padding-top:32px;
+    display:flex; justify-content:space-between; gap:24px; flex-wrap:wrap;
+    font-size:.75rem; letter-spacing:.08em;
+    color:var(--paper-60);
+  }
+
+  /* ---------- responsive ---------- */
+  @media (max-width:900px){
+    .hero{ padding-block:96px; }
+    .hero .container{ grid-template-columns:1fr; gap:56px; }
+    .section{ padding-block:96px; }
+    .section-head{ margin-bottom:64px; }
+    .feature-grid{ grid-template-columns:1fr; gap:48px; }
+    .start .container{ grid-template-columns:1fr; gap:48px; }
+    .global-nav{ gap:24px; }
+    .global-nav .nav-link{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= header ================= -->
+<header class="site-header">
+  <div class="container">
+    <a href="#top" class="brand">
+      渋谷 3D City Viewer
+      <span class="en">CESIUM × PLATEAU</span>
+    </a>
+    <nav class="global-nav" aria-label="グローバルナビゲーション">
+      <a class="nav-link" href="#features">機能</a>
+      <a class="nav-link" href="#start">はじめる</a>
+      <a class="nav-cta" href="https://github.com/moonstarsky37/Shibuya-3D-City-Viewer-Demo" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ================= hero ================= -->
+  <section class="hero">
+    <!-- 装飾：都市俯瞰グリッド＋データライン（inline SVG／瑠璃の透明度変体のみ） -->
+    <svg class="hero-deco" aria-hidden="true" viewBox="0 0 1440 760" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <pattern id="citygrid" width="72" height="72" patternUnits="userSpaceOnUse">
+          <path d="M72 0H0V72" fill="none" stroke="rgba(0,92,175,.07)" stroke-width="1"/>
+        </pattern>
+      </defs>
+      <rect width="1440" height="760" fill="url(#citygrid)"/>
+      <!-- データ感の折れ線（俯瞰した街区を横断するイメージ） -->
+      <polyline points="-40,620 240,540 470,585 760,470 1030,510 1290,400 1500,430"
+                fill="none" stroke="rgba(0,92,175,.28)" stroke-width="1.5"/>
+      <polyline points="-40,700 300,650 620,690 940,600 1250,640 1500,560"
+                fill="none" stroke="rgba(0,92,175,.14)" stroke-width="1"/>
+      <g fill="#005CAF">
+        <circle cx="240" cy="540" r="3.5" opacity=".55"/>
+        <circle cx="760" cy="470" r="3.5" opacity=".55"/>
+        <circle cx="1290" cy="400" r="3.5" opacity=".55"/>
+        <circle cx="470" cy="585" r="2.5" opacity=".3"/>
+        <circle cx="1030" cy="510" r="2.5" opacity=".3"/>
+      </g>
+    </svg>
+
+    <div class="container">
+      <div class="hero-copy">
+        <p class="eyebrow">OPEN DATA URBAN VIEWER</p>
+        <h1>渋谷を、<br>まるごと<span class="accent">3D</span>で。</h1>
+        <p class="lead">
+          国土交通省 PLATEAU の3D都市モデルを CesiumJS で描画。
+          渋谷の建物群を、ブラウザだけで自由に見わたせる
+          オープンソースのデモです。
+        </p>
+        <div class="cta-row">
+          <a class="btn-primary" href="#start">はじめる</a>
+          <a class="link-arrow" href="https://github.com/moonstarsky37/Shibuya-3D-City-Viewer-Demo" target="_blank" rel="noopener">GitHub で見る</a>
+        </div>
+      </div>
+      <div class="hero-media">
+        <figure>
+          <img src="https://raw.githubusercontent.com/moonstarsky37/Shibuya-3D-City-Viewer-Demo/main/public/preview.gif"
+               alt="Shibuya 3D City Viewer の画面。渋谷駅周辺のPLATEAU建築モデルを上空から俯瞰している" width="1200" height="675">
+          <figcaption>SHIBUYA STATION AREA — PLATEAU LOD1/LOD2</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= features ================= -->
+  <section class="features section" id="features">
+    <div class="container">
+      <div class="section-head">
+        <p class="section-label">FEATURES</p>
+        <h2>都市を、データで見る。</h2>
+      </div>
+
+      <div class="feature-grid">
+        <article class="feature-card">
+          <p class="feature-num">01</p>
+          <svg class="feature-icon" width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <!-- 建築モデル：ワイヤーフレームのビル群 -->
+            <path d="M8 40V22l8-4v22"/>
+            <path d="M16 40V18l10 5v17"/>
+            <path d="M26 40V12l12 6v22"/>
+            <path d="M4 40h40"/>
+            <path d="M31 22v3M31 29v3M12 27v3" stroke-opacity=".5"/>
+          </svg>
+          <h3>PLATEAU 建築モデル</h3>
+          <p>
+            国土交通省のオープンデータ「PLATEAU」から渋谷区の
+            3D都市モデルを読み込み、建物群を実寸スケールで再現します。
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <p class="feature-num">02</p>
+          <svg class="feature-icon" width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <!-- 自由視点：地球儀と軌道 -->
+            <circle cx="24" cy="24" r="12"/>
+            <path d="M24 12c-4 3-4 21 0 24M24 12c4 3 4 21 0 24M12.5 21h23M12.5 27h23" stroke-opacity=".5"/>
+            <ellipse cx="24" cy="24" rx="20" ry="7" transform="rotate(-18 24 24)"/>
+            <circle cx="41" cy="17" r="2" fill="currentColor" stroke="none"/>
+          </svg>
+          <h3>自由なカメラワーク</h3>
+          <p>
+            Cesium のエンジンで、上空からの俯瞰も街路レベルの視点も。
+            マウスひとつで、シームレスに街を行き来できます。
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <p class="feature-num">03</p>
+          <svg class="feature-icon" width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <!-- インストール不要：ブラウザと再生 -->
+            <rect x="6" y="10" width="36" height="28" rx="2"/>
+            <path d="M6 17h36"/>
+            <path d="M10 13.5h3M15 13.5h3" stroke-opacity=".5"/>
+            <path d="M21 23l8 4.5-8 4.5z" fill="currentColor" stroke="none"/>
+          </svg>
+          <h3>インストール不要</h3>
+          <p>
+            WebGL 対応ブラウザがあれば、その場ですぐ体験。
+            ビルド成果物は静的ファイルのみで、どこにでも配置できます。
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= get started ================= -->
+  <section class="start section" id="start">
+    <div class="container">
+      <div>
+        <div class="section-head">
+          <p class="section-label">GET STARTED</p>
+          <h2>3ステップで、<br>手元に渋谷を。</h2>
+        </div>
+        <ol class="step-list">
+          <li>
+            <div>
+              <strong>リポジトリを取得</strong>
+              <span>GitHub からソースコードをクローンします。</span>
+            </div>
+          </li>
+          <li>
+            <div>
+              <strong>依存関係をインストール</strong>
+              <span>npm で CesiumJS ほか必要なパッケージを導入。</span>
+            </div>
+          </li>
+          <li>
+            <div>
+              <strong>ローカルで起動</strong>
+              <span>開発サーバーを立ち上げ、ブラウザで開くだけ。</span>
+            </div>
+          </li>
+        </ol>
+        <a class="btn-primary" href="https://github.com/moonstarsky37/Shibuya-3D-City-Viewer-Demo" target="_blank" rel="noopener">リポジトリへ</a>
+      </div>
+
+      <div class="terminal" role="img" aria-label="セットアップ用のターミナルコマンド例">
+        <div class="terminal-bar"><i></i><i></i><i></i></div>
+        <pre><span class="prompt">$</span> git clone https://github.com/moonstarsky37/Shibuya-3D-City-Viewer-Demo.git
+<span class="prompt">$</span> cd Shibuya-3D-City-Viewer-Demo
+<span class="prompt">$</span> npm install
+<span class="prompt">$</span> npm run dev
+<span class="comment"># 表示されたローカルURLをブラウザで開く</span></pre>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ================= footer ================= -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <p class="brand">渋谷 3D City Viewer <span class="en" style="color:rgba(252,250,242,.6)">CESIUM × PLATEAU</span></p>
+        <p>
+          オープンデータで、都市をひらく。
+          本デモは学習・検証目的で公開しているオープンソースプロジェクトです。
+        </p>
+      </div>
+      <nav class="footer-nav" aria-label="フッターナビゲーション">
+        <div>
+          <h4>PROJECT</h4>
+          <a href="#features">機能</a>
+          <a href="#start">はじめる</a>
+          <a href="https://github.com/moonstarsky37/Shibuya-3D-City-Viewer-Demo" target="_blank" rel="noopener">GitHub</a>
+        </div>
+        <div>
+          <h4>CREDITS</h4>
+          <a href="https://www.mlit.go.jp/plateau/" target="_blank" rel="noopener">Project PLATEAU</a>
+          <a href="https://www.geospatial.jp/ckan/dataset/plateau-tokyo23ku" target="_blank" rel="noopener">データセット（G空間情報センター）</a>
+          <a href="https://cesium.com/platform/cesiumjs/" target="_blank" rel="noopener">CesiumJS</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Shibuya 3D City Viewer Demo</p>
+      <p>出典：3D都市モデル（Project PLATEAU）東京都23区（国土交通省）</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

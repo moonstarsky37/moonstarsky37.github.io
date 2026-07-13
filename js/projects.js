@@ -399,6 +399,17 @@ const PROJECTS = [
     metrics: [], stack: ["Python", "uv", "PyQt6", "pyqtgraph", "NumPy"], tags: ["vision"],
     links: [{ label: { zh: "GitHub", en: "GitHub" }, url: "https://github.com/moonstarsky37/liver3d-viewer" },
             { label: { zh: "論文", en: "Thesis" }, url: "https://tdr.lib.ntu.edu.tw/jspui/handle/123456789/77270" }], featured: false
+  },
+  {
+    id: "shibuya-3d-viewer", band: "more", icon: "🗼", period: "2024-12",
+    org: { zh: "個人專案", en: "Personal project" },
+    title: { zh: "澀谷 3D 城市瀏覽器", en: "Shibuya 3D City Viewer" },
+    desc:  { zh: "CesiumJS 載入東京 PLATEAU 3D Tiles，瀏覽器直接漫遊澀谷街區。", en: "CesiumJS demo streaming Tokyo PLATEAU 3D Tiles — fly through Shibuya in the browser." },
+    detail:{ zh: "想在瀏覽器直接看東京都市模型：以 CesiumJS 1.123 載入「3D都市モデル（Project PLATEAU）東京都23区（国土交通省）」的澀谷區 3D Tiles，Node 18 + http-server 本地即起。2026-07 以自建 jp-ui-design skill 產出日系風 landing page（白練×瑠璃配色、Noto Sans JP、半滿版版式）作為專案門面。",
+             en: "A browser-based view of Tokyo's official city model: CesiumJS 1.123 streams Shibuya 3D Tiles from MLIT's Project PLATEAU (Tokyo 23 wards dataset); Node 18 + http-server to run locally. In 2026-07 added a Japanese-style landing page (shironeri×ruri palette, Noto Sans JP, half-bleed layout) generated with my jp-ui-design skill." },
+    metrics: [], stack: ["CesiumJS", "JavaScript", "Node.js"], tags: ["web"],
+    links: [{ label: { zh: "原始碼", en: "Source" }, url: "https://github.com/moonstarsky37/Shibuya-3D-City-Viewer-Demo" },
+            { label: { zh: "線上展示", en: "Live demo" }, url: "https://moonstarsky37.github.io/demos/shibuya/" }], featured: false
   }
 ];
 
