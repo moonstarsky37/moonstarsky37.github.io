@@ -316,7 +316,9 @@ const PROJECTS = [
     desc:  { zh: "以 TextAlive App API 打造隨音樂歌詞即時反應的互動網頁。", en: "An interactive web experience reacting live to lyrics via the TextAlive App API." },
     detail:{ zh: "組隊參加初音未來 Magical Mirai 2025 程式競賽，以 TextAlive App API 開發歌詞同步的互動式網頁應用，探索 Web 前端與音樂資料流的即時協作。",
              en: "Team entry to the Hatsune Miku Magical Mirai 2025 contest: a lyric-synchronized interactive web app on the TextAlive App API, exploring real-time choreography between front-end and music data." },
-    metrics: [], stack: ["JavaScript", "TextAlive API", "Web Audio"], tags: ["web"], links: [{ label: { zh: "競賽頁", en: "Contest" }, url: "https://magicalmirai.com/2025/procon/index_en.html" }], featured: false
+    metrics: [], stack: ["JavaScript", "TextAlive API", "Web Audio"], tags: ["web"], links: [{ label: { zh: "線上展示", en: "Live demo" }, url: "https://moonstarsky37.github.io/miku-magical-mirai-music-player/" },
+            { label: { zh: "原始碼", en: "Source" }, url: "https://github.com/moonstarsky37/miku-magical-mirai-music-player" },
+            { label: { zh: "競賽頁", en: "Contest" }, url: "https://magicalmirai.com/2025/procon/index_en.html" }], featured: false
   },
   {
     id: "tpe-dataplatform", band: "more", icon: "🤰", period: "2023",
