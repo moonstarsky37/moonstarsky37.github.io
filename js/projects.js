@@ -409,7 +409,7 @@ const PROJECTS = [
              en: "A browser-based view of Tokyo's official city model: CesiumJS 1.123 streams Shibuya 3D Tiles from MLIT's Project PLATEAU (Tokyo 23 wards dataset); Node 18 + http-server to run locally. In 2026-07 added a Japanese-style landing page (shironeri×ruri palette, Noto Sans JP, half-bleed layout) generated with my jp-ui-design skill." },
     metrics: [], stack: ["CesiumJS", "JavaScript", "Node.js"], tags: ["web"],
     links: [{ label: { zh: "原始碼", en: "Source" }, url: "https://github.com/moonstarsky37/Shibuya-3D-City-Viewer-Demo" },
-            { label: { zh: "線上展示", en: "Live demo" }, url: "https://moonstarsky37.github.io/demos/shibuya/" }], featured: false
+            { label: { zh: "線上展示", en: "Live demo" }, url: "https://moonstarsky37.github.io/Shibuya-3D-City-Viewer-Demo/" }], featured: false
   }
 ];
 
