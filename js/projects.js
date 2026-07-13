@@ -319,6 +319,19 @@ const PROJECTS = [
     metrics: [], stack: ["JavaScript", "TextAlive API", "Web Audio"], tags: ["web"], links: [{ label: { zh: "競賽頁", en: "Contest" }, url: "https://magicalmirai.com/2025/procon/index_en.html" }], featured: false
   },
   {
+    id: "tpe-dataplatform", band: "more", icon: "🤰", period: "2023",
+    org: { zh: "2023 臺北程式設計節黑客松", en: "Taipei Codefest 2023 Hackathon" },
+    title: { zh: "友善生育城市儀表板", en: "Pregnancy-Friendly City Dashboard" },
+    desc:  { zh: "6 人隊長帶隊晉級決賽：6 個友善生育儀表板組件，整合托育、生育率、心理資源等臺北開放資料。", en: "Led a 6-person team to the finals — 6 pregnancy-friendly dashboard components on Taipei open data." },
+    detail:{ zh: "基於臺北城市儀表板開源前端（Vue 3）fork 客製：爬蟲＋跨機關開放資料經 pandas/GeoPandas ETL 產出圖表 JSON 與 GeoJSON 圖層；6 個組件涵蓋托育中心收托與收費、新生兒統計、心理諮詢處、生育率×物價、產後離職率，其中 3 個含 Mapbox 地圖圖層。",
+             en: "Customized fork of the open-source Taipei City Dashboard FE (Vue 3): crawler + multi-agency open data through a pandas/GeoPandas ETL into chart JSON and GeoJSON layers; 6 components covering daycare capacity/fees, newborn stats, counseling sites, fertility vs CPI and post-childbirth employment, 3 with Mapbox map layers." },
+    metrics: [ { v: "6", label: { zh: "儀表板組件", en: "dashboard components" } },
+               { v: "3", label: { zh: "Mapbox 地圖圖層", en: "map-layer components" } },
+               { v: { zh: "決賽", en: "Finals" }, label: { zh: "6 人團隊隊長", en: "captain of 6" } } ],
+    stack: ["Vue", "Python", "pandas", "GeoPandas", "Mapbox"],
+    tags: ["web"], links: [{ label: { zh: "原始碼", en: "Source" }, url: "https://github.com/moonstarsky37/TPE-DataPlatform" }], featured: false
+  },
+  {
     id: "hack104", band: "more", icon: "🧩", period: "2017",
     org: { zh: "HACK104 黑客松", en: "HACK104 Hackathon" },
     title: { zh: "NMF 職缺推薦", en: "Job Recommendation with NMF" },
