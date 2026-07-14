@@ -412,6 +412,21 @@ const PROJECTS = [
     metrics: [], stack: ["CesiumJS", "JavaScript", "Node.js"], tags: ["web"],
     links: [{ label: { zh: "原始碼", en: "Source" }, url: "https://github.com/moonstarsky37/Shibuya-3D-City-Viewer-Demo" },
             { label: { zh: "線上展示", en: "Live demo" }, url: "https://moonstarsky37.github.io/Shibuya-3D-City-Viewer-Demo/" }], featured: false
+  },
+  {
+    id: "twitterclawer", band: "more", icon: "📚", period: "2026-07",
+    org: { zh: "個人工具", en: "Personal tool" },
+    title: { zh: "TwitterClawer — X 圖文作家封存與漫畫閱讀器", en: "TwitterClawer — X Comic-Artist Archiver & Reader" },
+    desc:  { zh: "X 圖文作家封存＋離線漫畫閱讀器；thread 併話，首抓 344 話。", en: "Archive comic artists on X into an offline comic reader; threads become chapters — 344 episodes on the first artist." },
+    detail:{ zh: "追的漫畫作家把長篇散在幾百則貼文裡。gallery-dl 唯讀 Firefox session cookie（不碰密碼）抓 name=orig 原圖與推文中繼資料，conversation_id 分組成話，生成單檔離線閱讀器；多作家追蹤清單各自獨立成頁。manifest 為修復依據，缺檔可位元組一致補回。TDD 78 測試，對抗式審查修掉路徑穿越與 XSS 面；個人追蹤資料只存本機，公開 repo 零個資。",
+             en: "The artists I follow scatter long series across hundreds of posts. gallery-dl reuses the Firefox session cookie read-only (passwords untouched) to fetch orig-resolution images plus tweet metadata; threads group into chapters; output is a self-contained offline reader, one page per tracked artist. The manifest doubles as a recovery blueprint — missing files restore byte-identically. Built TDD with 78 tests; adversarial review closed path-traversal and XSS surfaces; personal tracking data never leaves the machine." },
+    metrics: [
+      { v: "344", label: { zh: "首位作家封存話數", en: "chapters archived (first artist)" } },
+      { v: "78", label: { zh: "pytest 測試全綠", en: "pytest cases green" } }
+    ],
+    stack: ["Python", "uv", "gallery-dl", "HTML/CSS/JS"], tags: ["web"],
+    links: [{ label: { zh: "原始碼", en: "Source" }, url: "https://github.com/moonstarsky37/TwitterClawer" },
+            { label: { zh: "線上展示", en: "Live demo" }, url: "https://moonstarsky37.github.io/TwitterClawer/" }], featured: false
   }
 ];
 
