@@ -427,6 +427,32 @@ const PROJECTS = [
     stack: ["Python", "uv", "gallery-dl", "HTML/CSS/JS"], tags: ["web"],
     links: [{ label: { zh: "原始碼", en: "Source" }, url: "https://github.com/moonstarsky37/TwitterClawer" },
             { label: { zh: "線上展示", en: "Live demo" }, url: "https://moonstarsky37.github.io/TwitterClawer/" }], featured: false
+  },
+  {
+    id: "selection2txt", band: "more", icon: "📸", period: "2026-07",
+    org: { zh: "個人工具", en: "Personal tool" },
+    title: { zh: "selection2txt — 螢幕框選即時 OCR", en: "selection2txt — Screen-Region OCR" },
+    desc:  { zh: "全域快捷鍵框選螢幕→本地 Qwen3-VL OCR，常駐推理 0.2 秒出字，全程離線。", en: "Hotkey-select any screen region → local Qwen3-VL OCR; a persistent server answers in ~0.2 s, fully offline." },
+    detail:{ zh: "舊版每次辨識都重載模型要 10–30 秒。改為常駐 llama-server（自動偵測既有 router，否則自管子行程並掛 Windows Job Object 防孤兒）後暖機 0.2 秒出字；熱鍵避開 Snipaste 並支援設定視窗按鍵錄製；結果視窗保留原生圈選＋Ctrl+C；VL 模型不肯翻專有名詞密集畫面，改 OCR→translategemma 兩段式翻譯。pytest 63 綠、ruff 乾淨，Apache-2.0 開源附完整第三方授權聲明。",
+             en: "The old build reloaded the model on every call (10–30 s). Rebuilt on a persistent llama-server — it auto-detects an existing router or spawns its own child guarded by a Windows Job Object — so warm OCR lands in ~0.2 s. Snipaste-safe hotkeys with in-dialog key recording; the result popup keeps native text selection + Ctrl+C; VL models refuse proper-noun-heavy translation, so a two-stage OCR→translategemma pipeline handles it. 63 pytest green, ruff-clean, Apache-2.0 with full third-party notices." },
+    metrics: [
+      { v: "0.2s", label: { zh: "暖機辨識延遲", en: "warm OCR latency" } },
+      { v: "50×", label: { zh: "較逐次重載提速", en: "speed-up vs per-call reload" } },
+      { v: "63", label: { zh: "pytest 測試全綠", en: "pytest cases green" } }
+    ],
+    stack: ["Python", "uv", "PySide6", "llama.cpp", "Qwen3-VL"], tags: ["vision", "llm"],
+    links: [{ label: { zh: "原始碼", en: "Source" }, url: "https://github.com/moonstarsky37/selection2txt" }], featured: false
+  },
+  {
+    id: "seektune", band: "more", icon: "🎧", period: "2026-07",
+    org: { zh: "個人專案", en: "Personal project" },
+    title: { zh: "串流即時音樂辨識 PWA", en: "Streaming Live Music Recognition PWA" },
+    desc:  { zh: "手機麥克風串流，即時辨識周遭播放的歌曲並記錄歷史。", en: "Streams phone-mic audio to identify the music playing around you, with a match history." },
+    detail:{ zh: "自製的串流音樂辨識漸進式網頁應用：手機把麥克風音訊即時串流到後端，邊收邊辨識，命中後回傳歌曲資訊與 YouTube 連結，並保留辨識歷史。後端為單一 Go 服務，前端為可安裝的 React PWA。",
+             en: "A self-built streaming music-recognition PWA: the phone streams mic audio to the backend, which recognizes on the fly, returns the matched track with a YouTube link, and keeps a history. Single Go backend, installable React PWA front-end." },
+    metrics: [], stack: ["Go", "React", "PWA", "WebSocket"], tags: ["web"],
+    images: ["assets/img/seektune-listen.png", "assets/img/seektune-history.png"],
+    links: [], featured: false
   }
 ];
 
