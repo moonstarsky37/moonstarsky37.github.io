@@ -32,6 +32,29 @@ const BANDS = [
 ];
 
 const PROJECTS = [
+  {
+    id: "daily-tech-news",
+    band: "more",
+    icon: "📰",
+    period: "2026",
+    org:   { zh: "個人專案", en: "Personal project" },
+    title: { zh: "每日科技情報站", en: "Daily Tech News" },
+    desc:  { zh: "每天 6 點自動採集 39 個來源，查證產出圖文情報並開 PR。", en: "Self-running daily brief: 39 sources verified, written and PR'd at 6 AM." },
+    detail:{ zh: "把整個編輯部做成流水線：34 個 RSS/HTML/PTT 來源加 5 個 X 官方帳號，跨來源聚合去重、六訊號評分選題、竄升詞偵測補趨勢盲區；LLM 寫作 agent 依規則書回一手來源查證（題目一律當假設），產出含 SVG 圖解的繁中文章；20 餘條機器閘門（來源獨立性、版面密度、文風禁詞、辭典覆蓋）擋在 build 前，通過才自動開 PR 由人工 merge。上線首日 41 篇文章、247 頁靜態站，寫作 agent 單日推翻四個題目前提，含識破一個不存在的評測名。",
+           en: "A newsroom as a pipeline: 34 RSS/HTML/PTT sources plus 5 official X accounts, cross-source dedup, six-signal scoring and rising-term detection. An LLM writer verifies every topic against primary sources under a rulebook that treats headlines as hypotheses, producing illustrated articles; 20+ build gates (source independence, visual density, banned filler, glossary coverage) sit before an auto-opened PR that a human merges. Day one: 41 articles, 247 static pages; the writer overturned four topic premises in a single day, including a benchmark that does not exist." },
+    metrics: [
+      { v: "39", label: { zh: "自動採集來源", en: "sources collected" } },
+      { v: "41 篇", label: { zh: "上線首日文章", en: "articles on day one" } },
+      { v: "20+", label: { zh: "build 品質閘門", en: "build quality gates" } }
+    ],
+    stack: ["Python", "Astro", "TypeScript", "Claude Code"],
+    tags: ["llm", "web"],
+    links: [
+      { label: { zh: "原始碼（私有 repo，僅本人登入可見）", en: "Source (private repo, owner-only)" }, url: "https://github.com/moonstarsky37/daily-tech-news" }
+    ],
+    images: [],
+    featured: false
+  },
   /* ---------- 🛰 space ---------- */
   {
     id: "tasa-cube", band: "space", icon: "🛰", period: "2023",
