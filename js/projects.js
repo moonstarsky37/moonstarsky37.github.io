@@ -476,6 +476,21 @@ const PROJECTS = [
     metrics: [], stack: ["Go", "React", "PWA", "WebSocket"], tags: ["web"],
     images: ["assets/img/seektune-listen.png", "assets/img/seektune-history.png"],
     links: [], featured: false
+  },
+  {
+    id: "trust-cafe", band: "more", icon: "☕", period: "2016 → 2026",
+    org: { zh: "大學課程作品（2026 翻新）", en: "Undergraduate coursework (rebuilt 2026)" },
+    title: { zh: "Trust Cafe — 咖啡廳活動管理系統", en: "Trust Cafe — Community Event Management" },
+    desc:  { zh: "2016 資料庫課程半成品重建：Express 5＋Knex 九表全約束，19 測試全綠。", en: "Half-finished 2016 DBMS coursework rebuilt on Express 5 + Knex; 9 constrained tables, 19 tests green." },
+    detail:{ zh: "大學 DBMS 課程作品放了十年：DB 憑證檔被 gitignore 遺失、資料表全空、路由引用未定義變數，從未真正跑起來。2026 全面重建：分層 routes→services→repositories、Knex migrations＋seeds（SQLite 開發／MySQL 8 生產）、bcrypt 取代明文密碼、中文 ENUM 正規化為共用 tags 表、六份複製查詢併成一句 GROUP BY，加上分析儀表板與 JSON API；23 項舊缺陷逐條記錄於 refactoring notes，原版保留 legacy/ 對照。",
+             en: "University DBMS coursework dormant for a decade: the gitignored DB credential file was lost, tables were empty, routes referenced undefined variables — it never actually ran. Rebuilt in 2026: layered routes→services→repositories, Knex migrations + seeds (SQLite dev / MySQL 8 prod), bcrypt over plaintext, Chinese ENUMs normalized into a shared tags table, six copy-pasted queries collapsed into one GROUP BY, plus an analytics dashboard and JSON API; 23 legacy defects documented in the refactoring notes with the original kept in legacy/ for contrast." },
+    metrics: [
+      { v: "19", label: { zh: "整合測試全綠", en: "integration tests green" } },
+      { v: "23", label: { zh: "舊缺陷記錄並修復", en: "legacy defects documented & fixed" } },
+      { v: "9", label: { zh: "資料表全 FK＋UNIQUE 約束", en: "tables with full FK + UNIQUE constraints" } }
+    ],
+    stack: ["Node.js", "Express 5", "Knex", "SQLite", "MySQL", "Bootstrap 5"], tags: ["web"],
+    links: [{ label: { zh: "原始碼", en: "Source" }, url: "https://github.com/MIS-DBMS/mis-dbms" }], featured: false
   }
 ];
 
