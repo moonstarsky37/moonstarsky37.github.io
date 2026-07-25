@@ -159,3 +159,25 @@ thumb: "assets/img/sewer-01.png"    // 卡片頂部 150px 高封面
 - **detail 三段式**：背景問題 → 你的作法 → 結果。不確定的數字寧可不寫。
 - 公司案照舊規則：**寫客戶白話名稱，不寫內部案號**（B2311 這種外人看不懂）。
 - 每季回顧一次 `TIMELINE`，把新的里程碑補上去。
+
+---
+
+## 9. 檔案結構與重新部署（災難復原用）
+
+```
+index.html      骨架（不含內容；noscript 靜態摘要在 <main> 開頭）
+css/style.css   樣式（tokens 在 :root）
+js/projects.js  ★ 所有內容資料
+js/i18n.js      介面字串（中英）
+js/main.js      渲染與互動
+resume/         ATS 履歷頁（HTML，公開版不放電話）
+docs/           設計規格
+```
+
+若 repo 需從零重建：
+
+1. GitHub 建立 public repo，名稱固定 `moonstarsky37.github.io`。
+2. 本資料夾內：`git remote add origin https://github.com/moonstarsky37/moonstarsky37.github.io.git && git push -u origin main`
+3. Repo → Settings → Pages → Source 選 `main` / root，約 1 分鐘生效。
+
+⚠️ 公開版履歷永遠不放電話號碼；電話只存在本地投遞版（`final_CV_2026`、`履歷產出_2026/11–14`）。
